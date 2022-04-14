@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkhitomi=self.webpackChunkhitomi||[]).push([[937],{8937:function(e,t,i){e.exports=i.p+"static/media/Screenshot_2.c33a124f87385b84ebd2.jpg"}}]);
