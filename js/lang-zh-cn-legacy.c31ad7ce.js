@@ -1,0 +1,1 @@
+"use strict";(self["webpackChunkweb001"]=self["webpackChunkweb001"]||[]).push([[361],{97213:function(e,a,s){s.r(a);var u=s(78918),n=s(21877);a["default"]=(0,u.Z)((0,u.Z)({},n["default"]),{},{common:{username:"用户名",password:"密码",save:"保存",edit:"编辑",update:"更新",delete:"删除",forever:"永久",expired:"过期",zhCn:"简体中文",zhTw:"繁体中文",en:"英文"}})}}]);
