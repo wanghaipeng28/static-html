@@ -42,7 +42,9 @@ function respond (event, handler) {
     if (res instanceof Response) {
       event.respondWith(res)
     }
-  } catch (e) {}
+  } catch (e) {
+    // console.log(e.toString)
+  }
 }
 
 // 缓存路由注册
@@ -133,7 +135,9 @@ function strategyFactory(cacheName, matchOptions, fetchOptions) {
     try {
       // 优先匹配本地缓存
       response = await getCachedResponse(request)
-    } catch (e) {}
+    } catch (e) {
+      // console.log(e.toString())
+    }
     // 匹配不到缓存或者缓存读取出现异常时，再去发起网络请求
     // 并且将请求成功的资源写入缓存中
     if (response == null) {
@@ -148,7 +152,8 @@ self.addEventListener('activate', () => {
 })
 router.registerRoute(({ url }) => {
   const urlObj = new URL(url)
-  return urlObj.pathname === '/book/' || urlObj.pathname === '/book/index.html'
+  const allowUrl = ['/book/', '/book/index.html', '/static-html/', '/static-html/index.html']
+  return allowUrl.includes(urlObj.pathname)
 }, strategyFactory(self.cacheName))
 router.registerRoute(/\.(css|js)$/, strategyFactory(self.cacheName))
 router.registerRoute(/\.(jpe?g|png|svg|ico)$/, strategyFactory(self.cacheName))
