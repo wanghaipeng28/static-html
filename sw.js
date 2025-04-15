@@ -1,6 +1,6 @@
 // serviceWorker
 self.version = '001'
-self.cacheName = 'dev-page-caches'
+self.cacheName = 'account-caches'
 // 匹配方法
 function match (rule, request) {
   switch (Object.prototype.toString.call(rule)) {
@@ -148,7 +148,7 @@ self.addEventListener('activate', () => {
 })
 router.registerRoute(({ url }) => {
   const urlObj = new URL(url)
-  return urlObj.pathname === '/' || urlObj.pathname === '/index.html'
+  return urlObj.pathname === '/book/' || urlObj.pathname === '/book/index.html'
 }, strategyFactory(self.cacheName))
 router.registerRoute(/\.(css|js)$/, strategyFactory(self.cacheName))
 router.registerRoute(/\.(jpe?g|png|svg|ico)$/, strategyFactory(self.cacheName))
