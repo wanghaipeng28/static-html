@@ -1,17 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>清除缓存</title>
-</head>
-<body>
-<script>
-    setTimeout(async () => {
-      if (caches?.delete) {
-        const result = await caches.delete('account-caches')
-        alert(result ? '清除成功' : '清除失败')
-      }
-    }, 1000)
-</script>
-</body>
+  </head>
+  <body>
+    <script>
+      setTimeout(async () => {
+        var regs = await navigator.serviceWorker.getRegistrations()
+        if (regs.length) {
+          alert(`当前共有${regs.length}个sw。`)
+          for (var i = 0; i < regs.length; i++) {
+            var reg = regs[i]
+            const result = confirm(
+              `第${i + 1}个sw路径：${reg.active.scriptURL}, 状态：${reg.active.state}`
+            )
+            if (result) {
+              reg.unregister()
+            }
+          }
+        } else {
+          alert('当前没有存活sw')
+        }
+      }, 1000)
+    </script>
+  </body>
 </html>

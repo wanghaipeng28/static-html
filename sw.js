@@ -1,8 +1,8 @@
 // serviceWorker
-self.version = '001'
+self.version = '002'
 self.cacheName = 'account-caches'
 // 匹配方法
-function match (rule, request) {
+function match(rule, request) {
   switch (Object.prototype.toString.call(rule)) {
     // url 文本匹配
     case '[object String]':
@@ -18,7 +18,7 @@ function match (rule, request) {
 }
 
 // 响应方法
-function respond (event, handler) {
+function respond(event, handler) {
   try {
     // 执行响应处理方法，根据返回结果进行兜底
     let res = handler(event.request)
@@ -32,7 +32,7 @@ function respond (event, handler) {
         return response
       })
         // 异步响应错误处理，即直接返回状态码为 500 Response 对象
-        .catch(() => new Response('Service Worker 出错', {status: 500}))
+        .catch(() => new Response('Service Worker 出错', { status: 500 }))
       event.respondWith(promise)
       return
     }
@@ -49,13 +49,13 @@ function respond (event, handler) {
 
 // 缓存路由注册
 class Router {
-  constructor () {
+  constructor() {
     // 存放路由规则
     this.routes = []
     // 注册 fetch 事件拦截
     this.initProxy()
   }
-  initProxy () {
+  initProxy() {
     self.addEventListener('fetch', event => {
       // 当拦截到资源请求时，会遍历已注册的路由规则，并执行相应规则所对应的策略
       for (let route of this.routes) {
@@ -68,8 +68,8 @@ class Router {
       }
     })
   }
-  registerRoute (rule, handler) {
-    this.routes.push({rule, handler})
+  registerRoute(rule, handler) {
+    this.routes.push({ rule, handler })
   }
 }
 
@@ -125,7 +125,7 @@ function strategyFactory(cacheName, matchOptions, fetchOptions) {
     // 更新缓存过程无需阻塞函数执行
     cacheResponse(request, response.clone())
       // 同时缓存更新行为只需静默执行即可
-      .catch(() => {})
+      .catch(() => { })
     // 返回响应结果
     return response
   }
